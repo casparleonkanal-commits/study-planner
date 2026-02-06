@@ -31,7 +31,15 @@ li {
     background: white;
     padding: 10px;
     margin-bottom: 10px;
-    .active {}
+    
     
     
 }
+
+
+.completed {
+        text-decoration: line-through;
+        color: gray;
+    }
+    
+    
