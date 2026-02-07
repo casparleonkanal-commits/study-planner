@@ -4,18 +4,35 @@ const dueDateInput = document.getElementById("dueDate");
 const taskList = document.getElementById("taskList");
 const button = document.querySelector("button");
 
+button.addEventListener("click", addTask);
 
-button.addEventListener("click", () => {
+function addTask(){
   const li = document.createElement("li");
+  li.classList.add("task-item");
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.classList.add("task-checkbox");
+
+  const textSpan = document.createElement("span");
+  textSpan.textContent = `${subjectInput.value}: ${assignmentInput.value} (Due: ${dueDateInput.value})`;
+  textSpan.classList.add("task-text");
+
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "X";
+  deleteButton.classList.add("task-delete-button");
+   
  
 
-  const text = document.createTextNode(`${subjectInput.value} - ${assignmentInput.value} (Due: ${dueDateInput.value})`);
-
+  
   li.appendChild(checkbox);
-  li.appendChild(text);
+  li.appendChild(textSpan);
+  li.appendChild(deleteButton);
+
+   deleteButton.addEventListener("click", () => {
+    taskList.removeChild(li);
+   });
 
   checkbox.addEventListener("change", () => {
     li.classList.toggle("completed", checkbox.checked);
@@ -27,4 +44,4 @@ button.addEventListener("click", () => {
   subjectInput.value = "";
   assignmentInput.value = "";
   dueDateInput.value = "";
-});
+};
