@@ -9,6 +9,23 @@
 
  <h1>Study Planner</h1>
 
+ <div class="Settings"> 
+    <label for="sortBy">Sort by:</label>
+    <select id="sortBy">
+        <option value="dueDate">Due Date</option>
+        <option value="subject">Subject</option>
+    </select>
+
+    <label for="filterBy">Filter by subject:</label>
+    <select id="filterBy">
+            <option value="all">All</option>
+    </select>
+ 
+
+ </div>
+
+ <ul id="taskList"></ul>
+
 
  <div class = "form">
     <input type="text" id="subject" placeholder="Subject">
@@ -17,10 +34,7 @@
     <button>Add task</button>
  </div>
   
- <ul id="taskList">
  
-
- </ul>
  
  
 

@@ -1,11 +1,13 @@
 const subjectInput = document.getElementById("subject");
 const assignmentInput = document.getElementById("assignment");
 const dueDateInput = document.getElementById("dueDate");
+const filterContent = document.getElementById("filterBy");
 const taskList = document.getElementById("taskList");
 const button = document.querySelector("button");
 const tags = [];
 
 button.addEventListener("click", addTask);
+filterContent.addEventListener("change", applyFilter);
 
 function createIcons(pathData, className, viewBox) {
   const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -19,19 +21,42 @@ function createIcons(pathData, className, viewBox) {
   return icon;
 }
 
-function addTask(){
-  if (confirm(`Do you want to save this subject: ${subjectInput.value} as a tag?`)) {
-    const tag = subjectInput.value.trim();
-     
-    if (!tags.includes(tag)) {
-      tags.push(tag);
-    }
-  };
+function createTag(){
+ const tag = subjectInput.value.trim();
+ if (!tags.includes(tag)) {
+    if (confirm(`Do you want to save this subject: ${subjectInput.value} as a tag?`)) {
 
+      tags.push(tag);
+      return tag;};
+};
+return tag;
+};
+
+function applyFilter() { 
+  for (const tasks of taskList.children) {
+    if (filterContent.value === "all" || tasks.dataset.tag === filterContent.value) {
+      tasks.style.display = "flex";
+    } else {
+      tasks.style.display = "none";
+    }
+  }
+};
+function addTask(){
+  
 
   const li = document.createElement("li");
   li.classList.add("task-item");
-  li.appendChild(tag);
+  const tag = createTag();
+  li.dataset.tag = tag;
+
+  for (const tag of tags) {
+    if (filterContent.querySelector(`option[value="${tag}"]`)) continue;
+    const option = document.createElement("option");
+    option.value = tag;
+    option.textContent = tag;
+    filterContent.appendChild(option);
+  };
+
 
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -49,7 +74,7 @@ function addTask(){
 
 
   editButtonIcons.appendChild(createIcons(
-    "M12 3C12.2652 3 12.5196 3.10536 12.7071 3.29289L19.7071 10.2929C20.0976 10.6834 20.0976 11.3166 19.7071 11.7071C19.3166 12.0976 18.6834 12.0976 18.2929 11.7071L13 6.41421V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V6.41421L5.70711 11.7071C5.31658 12.0976 4.68342 12.0976 4.29289 11.7071C3.90237 11.3166 3.90237 10.6834 4.29289 10.2929L...",
+    "M12 3C12.2652 3 12.5196 3.10536 12.7071 3.29289L19.7071 10.2929C20.0976 10.6834 20.0976 11.3166 19.7071 11.7071C19.3166 12.0976 18.6834 12.0976 18.2929 11.7071L13 6.41421V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V6.41421L5.70711 11.7071C5.31658 12.0976 4.68342 12.0976 4.29289 11.7071C3.90237 11.3166 3.90237 10.6834 4.29289 10.2929L11.2929 3.29289C11.4804 3.10536 11.7348 3 12 3Z",
     "task-up-icon",
     "0 0 24 24"
   ));
@@ -93,17 +118,17 @@ function addTask(){
 
 
   editButtonIcons.children[0].addEventListener("click", () => {
-    const index = Array.from(taskList.children).indexOf(li);
-      if  (index > 0) {
-        taskList.insertBefore(li, taskList.children[index - 1]);
-      }
+    const prev = li.previousElementSibling;
+    if (prev) {
+      taskList.insertBefore(li, prev);
+    }  
     });
   
   editButtonIcons.children[1].addEventListener("click", () => {
-    const index = Array.from(taskList.children).indexOf(li);
-      if  (index < taskList.children.length - 1) {
-        taskList.insertBefore(li, taskList.children[index + 2]);
-      }
+    const next = li.nextElementSibling;
+    if (next) {
+      taskList.insertBefore(next, li);
+    }  
     });
 
   deleteButton.addEventListener("click", () => {
@@ -111,8 +136,12 @@ function addTask(){
   });
   
 
-
+  
   taskList.appendChild(li);
+  applyFilter();
+  
+
+
   
 
   subjectInput.value = "";
