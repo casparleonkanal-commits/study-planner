@@ -47,29 +47,51 @@ ul {
         color: gray;
     }
 
-.task-delete-button {
+
+.task-delete-button, .task-edit-button {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-
+    font-size: 14px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    
-
-    
-    
 }
 
-.task-delete-button, .task-checkbox {
+.task-delete-button, .task-checkbox, .task-edit-button {
     flex-shrink: 0;
 }
 
-.task-delete-button:hover {
+.task-delete-icon:hover {
     color: red;
+    transform: scale(1.2);
 }
 
-.task-item:hover .task-delete-button {
+.task-delete-icon {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+}
+
+
+
+.task-edit-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    fill: currentColor;
+}
+
+.task-up-icon, .task-down-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.task-up-icon:hover, .task-down-icon:hover {
+    color: gray;
+    transform: scale(1.2);
+}
+
+.task-item:hover .task-delete-button, .task-item:hover .task-edit-button {
     opacity: 1;
 }
 
