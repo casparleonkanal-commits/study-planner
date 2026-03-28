@@ -27,12 +27,37 @@
  <ul id="taskList"></ul>
 
 
- <div class = "form">
+ <button id="openCreateTask" class="add-task-btn">+</button>
+
+ <div class="modal hidden" id="createTaskModal">
+  <div class="modal-card">
+    <h2>Create task</h2>
+
     <input type="text" id="subject" placeholder="Subject">
     <input type="text" id="assignment" placeholder="Assignment">
     <input type="date" id="dueDate">
-    <button>Add task</button>
- </div>
+    <label class="tag-checkbox">
+        <input type="checkbox" id="saveAsTag">
+             Save subject as tag
+    </label>
+
+    <div class="modal-actions">
+      <button id="createTask">Create</button>
+      <button id="closeCreateTask">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal hidden" id="taskModal">
+  <div class="task-modal-card">
+    <h2 id="taskModalTitle">Task</h2>
+    <span id="taskModalAssignment"></span>
+    <span id="taskModalDueDate"> </span>
+
+
+    
+  </div>
+</div>
   
  
  

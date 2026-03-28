@@ -11,18 +11,73 @@ h1 {
     text-align: center;
 }
 
-.form {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: auto;
-    margin-bottom: 100px;
+.add-task-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 28px;
+  border: none;
+  cursor: pointer;
 }
 
-input, .form button {
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal-card {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+input, button {
     padding: 9px;
     
 }
+
+.task-modal-card {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.closeTaskModal {
+
+
+   position: absolute;
+   top: 10px;
+    right: 10px;
+
+    background: transparent;
+    border: black solid 2px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
 
 .Settings {
     display: flex;
@@ -56,6 +111,7 @@ ul {
     padding: 10px;
     margin-top: 10px;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .task-item.completed .task-text {
@@ -115,6 +171,11 @@ ul {
     flex: 1;
     word-break: break-word;
     overflow-wrap: anywhere;
+}
+
+.task-text:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 
